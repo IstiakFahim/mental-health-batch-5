@@ -4,7 +4,9 @@ import gspread
 from google.oauth2.service_account import Credentials
 
 # --- CONFIGURATION ---
-BATCH_NUMBER = 1 
+# This repo is specifically for Batch 3
+BATCH_NUMBER = 5
+
 CSV_FILE = f'survey_batch_{BATCH_NUMBER}.csv'
 SHEET_NAME = 'Survey_Results_Master'
 TAB_NAME = f'Results_{BATCH_NUMBER}'
@@ -12,8 +14,8 @@ TAB_NAME = f'Results_{BATCH_NUMBER}'
 # --- GOOGLE SHEETS SETUP ---
 scope = ["https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive"]
 
-# Load credentials from your JSON file
-creds = Credentials.from_service_account_file('credentials.json', scopes=scope)
+# This uses the Secrets you paste in the Streamlit Dashboard
+creds = Credentials.from_service_account_info(st.secrets["gcp_service_account"], scopes=scope)
 client = gspread.authorize(creds)
 
 # Open the spreadsheet and the specific tab

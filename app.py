@@ -19,7 +19,6 @@ def get_gspread_client():
 
 def get_worksheet():
     client = get_gspread_client()
-    # Retry connecting to the sheet
     for i in range(3): 
         try:
             sh = client.open(SHEET_NAME)
@@ -57,47 +56,81 @@ if not st.session_state.agreed:
         """)
 
     st.markdown("### 🧠 DSM-5 Data Quality & Labeling Guide")
-    st.write("Please read the following definitions carefully. They follow the DSM-5 mental health hierarchy:")
+    st.write("Please read the definitions below. You must categorize each text using this hierarchy:")
 
-    # Descriptive Hierarchical List
+    # --- COMPLETE HIERARCHICAL LIST (All 10 Categories, 16 Subcategories, 38 Disorders) ---
     st.markdown("""
-    **1. Mood Disorders** (Conditions affecting your emotional state)
-    * **Bipolar Disorders:** Extreme swings between high energy (mania) and low mood.
-        * *Includes: Bipolar 1, Bipolar 2, Cyclothymic.*
-    * **Depressive Disorders:** Intense, long-lasting feelings of sadness or loss of interest.
-        * *Includes: Major Depressive, Dysthymia, Seasonal Affective.*
+**1. Mood Disorders** *(Conditions affecting emotional state)*  
+* **Bipolar Disorders:** Extreme swings between high energy (mania) and low mood.  
+    * *Includes: Bipolar I Disorder, Bipolar II Disorder, Cyclothymic Disorder.*  
+* **Depressive Disorders:** Intense, long-lasting sadness or loss of interest.  
+    * *Includes: Major Depressive Disorder, Persistent Depressive Disorder (Dysthymia), Seasonal Affective Disorder.*
 
-    **2. Personality Disorders** (Long-term, rigid patterns of behavior and thinking)
-    * **Cluster A (Odd/Eccentric):** Characterized by social awkwardness and social withdrawal (Paranoid, Schizoid, Schizotypal).
-    * **Cluster B (Dramatic/Emotional):** Characterized by intense emotions and impulsive behavior (Antisocial, Histrionic, Narcissistic).
-    * **Cluster C (Anxious/Fearful):** Characterized by high levels of anxiety and fear (Avoidant, Dependent, Obsessive-Compulsive Personality).
+---
 
-    **3. Anxiety Disorders** (Persistent, excessive fear or worry)
-    * **Panic & Phobias:** Sudden terror or fear triggered by specific objects/social situations.
-    * **Generalized Anxiety (GAD):** Constant, non-stop worry about various daily things.
+**2. Personality Disorders** *(Long-term rigid behavior patterns)*  
+* **Cluster A – Odd/Eccentric:** Social withdrawal and distorted thinking.  
+    * *Includes: Paranoid Personality Disorder, Schizoid Personality Disorder, Schizotypal Personality Disorder.*  
+* **Cluster B – Dramatic/Emotional:** Intense emotions and impulsive behavior.  
+    * *Includes: Antisocial Personality Disorder, Histrionic Personality Disorder, Narcissistic Personality Disorder.*  
+* **Cluster C – Anxious/Fearful:** High anxiety and perfectionistic traits.  
+    * *Includes: Avoidant Personality Disorder, Dependent Personality Disorder, Obsessive-Compulsive Personality Disorder.*
 
-    **4. Sleep Disorders** (Problems with sleep quality, timing, and amount)
-    * **Insomnia Spectrum:** Constant difficulty falling asleep or staying asleep.
-    * **Other Issues:** Sudden sleep (Narcolepsy), breathing issues (Apnea), or leg discomfort.
+---
 
-    **5. OCD & Related Disorders** (Repetitive thoughts and "checking" rituals)
-    * **Obsessions & Compulsions:** Unwanted rituals used to reduce anxiety (OCD, Body Dysmorphia, Hoarding).
+**3. Anxiety Disorders** *(Persistent fear or excessive worry)*  
+* **Phobias:** Fear of specific objects or social situations.  
+    * *Includes: Social Anxiety Disorder, Agoraphobia.*  
+* **Panic Disorders:** Sudden, intense episodes of terror.  
+    * *Includes: Panic Disorder.*  
+* **Generalized Anxiety:** Chronic worry about everyday life.  
+    * *Includes: Generalized Anxiety Disorder (GAD).*
 
-    **6. Eating Disorders** (Serious disturbances in eating behavior)
-    * **Weight & Food Issues:** Extreme food restriction or lack of control over eating.
+---
 
-    **7. Neurodevelopmental Disorders** (Conditions appearing in early childhood)
-    * **ADHD & Autism:** Focus issues, hyperactivity, or challenges with social communication.
+**4. Sleep Disorders** *(Problems with sleep quality or timing)*  
+* **Insomnia Spectrum:** Difficulty falling or staying asleep.  
+    * *Includes: Insomnia Disorder.*  
+* **Other Sleep Issues:** Physical or neurological sleep disruptions.  
+    * *Includes: Narcolepsy, Sleep Apnea, Restless Legs Syndrome.*
 
-    **8. Schizophrenia Spectrum** (A break from reality)
-    * **Psychotic Disorders:** Seeing or hearing things that aren't there (hallucinations) or holding false beliefs (delusions).
+---
 
-    **9. Trauma & Stressor-Related** (Triggered by a traumatic life event)
-    * **PTSD & Adjustment:** Long-term trauma symptoms or extreme difficulty handling major life changes.
+**5. OCD & Related Disorders** *(Repetitive thoughts and behaviors)*  
+* **OCD Spectrum:** Unwanted thoughts and repetitive rituals to reduce anxiety.  
+    * *Includes: Obsessive-Compulsive Disorder, Body Dysmorphic Disorder, Hoarding Disorder.*
 
-    **10. Substance-Related** (Problems related to drug or alcohol use)
-    * **Addictive Disorders:** Compulsive use of substances despite them causing major life problems.
-    """)
+---
+
+**6. Eating Disorders** *(Serious disturbances in eating behavior)*  
+* **Restrictive/Compensatory Eating Patterns:** Extreme restriction or binge-purge behavior.  
+    * *Includes: Anorexia Nervosa, Bulimia Nervosa, Binge-Eating Disorder.*
+
+---
+
+**7. Neurodevelopmental Disorders** *(Conditions appearing in early childhood)*  
+* **ADHD:** Problems with attention, hyperactivity, and impulsivity.  
+* **Autism Spectrum Disorders:** Difficulty with social communication and repetitive behaviors.  
+    * *Includes: Autism Spectrum Disorder (ASD).*
+
+---
+
+**8. Schizophrenia Spectrum** *(Break from reality)*  
+* **Psychotic Disorders:** Hallucinations or delusions.  
+    * *Includes: Schizophrenia, Schizoaffective Disorder, Delusional Disorder.*
+
+---
+
+**9. Trauma & Stressor-Related Disorders** *(Triggered by traumatic experiences)*  
+* **PTSD Spectrum:** Emotional distress following trauma or major life events.  
+    * *Includes: Post-Traumatic Stress Disorder (PTSD), Adjustment Disorder.*
+
+---
+
+**10. Substance-Related & Addictive Disorders**  
+* **Substance Use Disorders:** Compulsive use of substances despite harmful consequences.  
+    * *Includes: Alcohol Use Disorder, Cannabis Use Disorder.*
+""")
 
     st.divider()
     if st.button("✅ I have read the definitions and I'm ready to start", type="primary"):
@@ -152,25 +185,24 @@ else:
                 st.error("Please enter your name!")
             else:
                 success = False
-                # --- RETRY LOGIC FOR GOOGLE API ---
                 with st.spinner("Saving to Google Sheets..."):
-                    for attempt in range(5): # Try 5 times
+                    # TRY 5 TIMES TO BEAT THE "API BUSY" ERROR
+                    for attempt in range(5): 
                         try:
                             worksheet = get_worksheet()
                             new_data = [str(current_row['id']), current_row['Title'], current_row['Body'], cat, sub, dis, user_input]
                             worksheet.append_row(new_data)
-                            
                             st.session_state.answered_ids.append(str(current_row['id']))
                             success = True
-                            break # Exit the retry loop if successful
-                        except Exception as e:
-                            # Wait longer each time (Exponential Backoff)
-                            wait_time = (attempt + 1) * 2 
-                            time.sleep(wait_time)
+                            break
+                        except:
+                            time.sleep((attempt + 1) * 2) 
                 
                 if success:
                     st.success("Saved!")
                     time.sleep(0.5)
                     st.rerun()
                 else:
-                    st.error("Google is very busy right now. Please wait 15 seconds and click Submit again.")
+                    st.error("Google is busy. Please wait 15 seconds and try again.")
+
+
